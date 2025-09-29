@@ -1,9 +1,9 @@
 import React from "react";
-import assets from "../assets/assets";
+import { assets } from "../assets/assets";
 
 const BookDetails = () => {
   return (
-    <div className="flex flex-col sm:flex-row w-full mt-20 py-4 px-4 gap-5">
+    <div className="flex flex-col sm:flex-row w-full mt-20 py-4 gap-5">
       <img src={assets.book3} alt="author photo" className="w-full" />
       <div className="px-3">
         <h1 className="font-medium text-xl py-3">About The Book</h1>
