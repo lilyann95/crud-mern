@@ -12,7 +12,7 @@ const bookRouter = express.Router();
 bookRouter.get("/:id", getBookById);
 bookRouter.get("/", getBooks);
 bookRouter.post("/addBook", addBook);
-bookRouter.put("/editBook/:id", editBookById);
-bookRouter.delete("/delete/:id", deleteBook);
+bookRouter.put("/:id", editBookById);
+bookRouter.delete("/:id", deleteBook);
 
 export default bookRouter;

@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div>
       <div className="flex flex-col sm:grid grid-cols-[2fr_1fr_1fr_1fr] justify-between gap-5 my-10 mt-40 text-sm">
-        <div className="">
+        <div>
           <h1 className="font-extrabold italic tracking-tighter text-xl mb-5">
             BOOK MANAGER.
           </h1>
@@ -15,7 +15,7 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="">
+        <div>
           <p className="text-xl font-medium mb-5">COMPANY</p>
           <ul className="flex flex-col gap-1 text-gray-600">
             <li>Home</li>
@@ -34,7 +34,7 @@ const Footer = () => {
 
         <div>
           <h2 className="text-xl font-medium mb-5">FIND US ON</h2>
-          <div className="flex flex-row items-center justify-around sm:justify-between sm:pr-4">
+          <div className="flex flex-row items-center justify-start sm:justify-between sm:pr-4">
             <img
               src={assets.facebook}
               alt="facebook"

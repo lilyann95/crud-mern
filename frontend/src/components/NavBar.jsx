@@ -16,7 +16,7 @@ const NavBar = () => {
         <NavLink to="/" className="flex flex-col items-center gap-1">
           <p className="text-lg font-medium hover:text-[#FF1493]">Home</p>
         </NavLink>
-        <NavLink to="/book-list" className="flex flex-col items-center gap-1">
+        <NavLink to="/books" className="flex flex-col items-center gap-1">
           <p className="text-lg font-medium hover:text-[#FF1493]">Books</p>
         </NavLink>
         <NavLink to="/add-book" className="flex flex-col items-center gap-1">
@@ -39,6 +39,8 @@ const NavBar = () => {
           onClick={() => setVisible(true)}
         />
       </div>
+
+      {visible ? <div></div> : <p></p>}
     </div>
   );
 };
