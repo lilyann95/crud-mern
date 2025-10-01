@@ -6,13 +6,14 @@ import {
   getBooks,
   deleteBook,
 } from "../controllers/booksController.js";
+import { authenticateToken } from "../middleware/authMiddleware.js";
 
 const bookRouter = express.Router();
 
-bookRouter.get("/:id", getBookById);
-bookRouter.get("/", getBooks);
-bookRouter.post("/addBook", addBook);
-bookRouter.put("/:id", editBookById);
-bookRouter.delete("/:id", deleteBook);
+bookRouter.get("/:id", authenticateToken, getBookById);
+bookRouter.get("/", authenticateToken, getBooks);
+bookRouter.post("/addBook", authenticateToken, addBook);
+bookRouter.put("/:id", authenticateToken, editBookById);
+bookRouter.delete("/:id", authenticateToken, deleteBook);
 
 export default bookRouter;

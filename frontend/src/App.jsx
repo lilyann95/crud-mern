@@ -7,13 +7,14 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import SearchBar from "./components/SearchBar";
+import RegisterForm from "./components/RegisterForm";
 
 function App() {
   return (
     <>
-      <NavBar />
-      <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
-        {/* <SearchBar /> */}
+      <RegisterForm />
+      {/* <NavBar /> */}
+      {/* <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/add-book" element={<AddBook />} />
@@ -21,7 +22,7 @@ function App() {
           <Route path="/books" element={<BookList />} />
         </Routes>
         <Footer />
-      </div>
+      </div> */}
     </>
   );
 }
