@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { assets } from "../assets/assets";
 import { faMagnifyingGlass, faBars } from "@fortawesome/free-solid-svg-icons";
+import { useLocation } from "react-router-dom";
+import { BookContext } from "../context/BookContext";
 
 const NavBar = () => {
+  const { showSearch, setShowSearch } = useContext(BookContext);
   const [visible, setVisible] = useState(false);
+  const location = useLocation();
 
   return (
     <div className="flex items-center justify-between bg-gray-400 mb-5 py-3 px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
@@ -24,7 +28,13 @@ const NavBar = () => {
         </NavLink>
       </ul>
       <div className="hidden sm:flex items-center gap-3">
-        <FontAwesomeIcon icon={faMagnifyingGlass} className="cursor-pointer" />
+        {location.pathname === "/books" && (
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            className="cursor-pointer"
+            onClick={() => setShowSearch(!showSearch)}
+          />
+        )}
         <img
           src={assets.book4}
           alt="User-image"
@@ -39,8 +49,8 @@ const NavBar = () => {
           onClick={() => setVisible(true)}
         />
       </div>
-
-      {visible ? <div></div> : <p></p>}
+      {/* show Menu items */}
+      {visible ? <div></div> : null}
     </div>
   );
 };

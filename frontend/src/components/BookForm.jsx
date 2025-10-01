@@ -32,7 +32,7 @@ const BookForm = () => {
 
         setTimeout(() => {
           navigate("/books");
-        }, 2000);
+        }, 1000);
       } else {
         setSnackBar({ message: "Failed to store the book", open: true });
       }

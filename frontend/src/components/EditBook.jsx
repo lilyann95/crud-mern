@@ -7,7 +7,7 @@ import { updateBook } from "../../api/books";
 import { useState } from "react";
 import SnackBar from "./SnackBar";
 
-const EditBook = ({ book, openDialog, onClose }) => {
+const EditBook = ({ book, openDialog, onClose, onUpdateBook }) => {
   const [form, setForm] = useState({});
   const [snackBar, setSnackBar] = useState({ message: "", open: false });
   const style = {
@@ -27,12 +27,16 @@ const EditBook = ({ book, openDialog, onClose }) => {
         year: form.year,
         description: form.description,
       };
-      await updateBook(book._id, newBook);
-      setSnackBar({ message: "Book edited successfully", open: true });
+      const updatedBook = await updateBook(book._id, newBook);
 
-      setTimeout(() => {
-        onClose();
-      }, 1000);
+      if (updatedBook) {
+        onUpdateBook(updatedBook.data.update);
+        setSnackBar({ message: "Book edited successfully", open: true });
+
+        setTimeout(() => {
+          onClose();
+        }, 1000);
+      }
     } catch (error) {
       throw new Error(`Error editing the book: ${error}`);
     }
