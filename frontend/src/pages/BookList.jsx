@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getBooks } from "../../api/books";
 import TableRow from "../components/TableRow";
 import { deleteBook } from "../../api/books";
 import SnackBar from "../components/SnackBar";
 import EditBook from "../components/EditBook";
+import SearchBar from "../components/SearchBar";
+import { BookContext } from "../context/BookContext";
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -11,6 +13,7 @@ const BookList = () => {
   const [editBook, setEditBook] = useState({});
   const [snackBar, setSnackBar] = useState({ message: "", open: false });
   const [openDialog, setOpenDialog] = useState(false);
+  const { showSearch } = useContext(BookContext);
 
   const handleOpenDialog = (book) => {
     setOpenDialog(true);
@@ -64,6 +67,24 @@ const BookList = () => {
     setSortedBooks(sortedCopy);
   };
 
+  const handleSearch = (search) => {
+    let sortedCopy = books.slice();
+    if (!search) {
+      setSortedBooks(books);
+      return;
+    }
+
+    const lowerSearch = search.toLowerCase();
+    sortedCopy = sortedCopy.filter(
+      (book) =>
+        book.title.toLowerCase().includes(lowerSearch) ||
+        book.author.toLowerCase().includes(lowerSearch) ||
+        book.year.toString().includes(lowerSearch) ||
+        book.description.toLowerCase().includes(lowerSearch)
+    );
+    setSortedBooks(sortedCopy);
+  };
+
   useEffect(() => {
     const fetchBooks = async () => {
       try {
@@ -94,6 +115,8 @@ const BookList = () => {
         open={snackBar.open}
         onClose={() => setSnackBar({ ...snackBar, open: false })}
       />
+      {showSearch && <SearchBar onSearch={handleSearch} />}
+
       <div className="">
         <div className="flex-1">
           <div className="flex justify-end text-base sm:text-2xl mb-4">

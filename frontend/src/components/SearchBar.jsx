@@ -1,10 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { BookContext } from "../context/BookContext";
 
-const SearchBar = () => {
+const SearchBar = ({ onSearch }) => {
   const { showSearch } = useContext(BookContext);
+  const [search, setSearch] = useState("");
+  const handleSearch = (searchValue) => {
+    console.log(searchValue);
+    if (searchValue.trim() === "") return;
+    onSearch(searchValue.trim());
+  };
   return (
     <>
       {showSearch && (
@@ -13,11 +19,17 @@ const SearchBar = () => {
             <input
               type="text"
               placeholder="Search"
-              className="flex outline-none bg-inherit"
+              value={search}
+              className="flex outline-none bg-inherit w-3/4"
+              onChange={(e) => {
+                setSearch(e.target.value);
+                handleSearch(e.target.value);
+              }}
             />
             <FontAwesomeIcon
               icon={faMagnifyingGlass}
               className="w-4 cursor-pointer"
+              onClick={handleSearch}
             />
           </div>
         </div>

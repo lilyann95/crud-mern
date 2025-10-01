@@ -3,13 +3,12 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { assets } from "../assets/assets";
 import { faMagnifyingGlass, faBars } from "@fortawesome/free-solid-svg-icons";
-import { useLocation } from "react-router-dom";
+
 import { BookContext } from "../context/BookContext";
 
 const NavBar = () => {
-  const { showSearch, setShowSearch } = useContext(BookContext);
+  const { setShowSearch, location } = useContext(BookContext);
   const [visible, setVisible] = useState(false);
-  const location = useLocation();
 
   return (
     <div className="flex items-center justify-between bg-gray-400 mb-5 py-3 px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
@@ -32,7 +31,7 @@ const NavBar = () => {
           <FontAwesomeIcon
             icon={faMagnifyingGlass}
             className="cursor-pointer"
-            onClick={() => setShowSearch(!showSearch)}
+            onClick={() => setShowSearch(true)}
           />
         )}
         <img

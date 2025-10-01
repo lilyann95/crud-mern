@@ -8,7 +8,7 @@ const AboutMe = () => {
         <h1 className="font-extrabold text-5xl text-[#ff00ff]">Hello</h1>
         <h2 className="font-extrabold text-5xl leading-normal">I'm Lyn</h2>
         <p className="font-normal text-base text-gray-400">
-          Welcome to my book store application. Let's read together.
+          Welcome to my book store application.
         </p>
         <p className="font-normal text-base text-gray-400">
           Let's read together
