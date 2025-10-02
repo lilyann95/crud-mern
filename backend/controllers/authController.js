@@ -10,14 +10,12 @@ const loginUser = async (req, res) => {
     const user = await userModel.findOne({ userName });
 
     if (!user) {
-      return res
-        .status(401)
-        .json({ message: "Invalid credentials1", username: user });
+      return res.status(401).json({ message: "Invalid credentials" });
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
-      return res.status(401).json({ message: "Invalid credentials2" });
+      return res.status(401).json({ message: "Invalid credentials" });
     }
 
     const payload = {
@@ -30,7 +28,7 @@ const loginUser = async (req, res) => {
     });
     res.status(200).json({ accessToken });
   } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -79,4 +77,20 @@ const registerUser = async (req, res) => {
   }
 };
 
-export { loginUser, registerUser };
+const getUser = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.user.id).select("-password");
+
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Error fetching user", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export { loginUser, registerUser, getUser };

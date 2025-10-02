@@ -1,14 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { assets } from "../assets/assets";
 import { faMagnifyingGlass, faBars } from "@fortawesome/free-solid-svg-icons";
-
+import { getLoggedInUser } from "../../api/LoggedInUser";
 import { BookContext } from "../context/BookContext";
 
 const NavBar = () => {
   const { setShowSearch, location } = useContext(BookContext);
   const [visible, setVisible] = useState(false);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const loggedUser = await getLoggedInUser();
+      setUser(loggedUser);
+    };
+    fetchUser();
+  }, []);
 
   return (
     <div className="flex items-center justify-between bg-gray-400 mb-5 py-3 px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
@@ -39,7 +48,7 @@ const NavBar = () => {
           alt="User-image"
           className="flex w-10 h-10 rounded-3xl cursor-pointer"
         />
-        <p className="text-base font-medium">Lyn</p>
+        {user && <p className="text-base font-medium">{user.userName}</p>}
       </div>
       <div className="sm:hidden">
         <FontAwesomeIcon
