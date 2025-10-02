@@ -16,7 +16,7 @@ app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.urlencoded({ extended: true }));
 
 //routes
-app.use("/auth", authRoute);
+app.use("/api/auth", authRoute);
 app.use("/api/books", bookRoute);
 app.get("/", (req, res) => {
   res.send("API2 is working");

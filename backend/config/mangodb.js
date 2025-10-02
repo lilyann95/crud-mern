@@ -5,7 +5,9 @@ const connectMongoDB = () => {
     console.log("DB Connected");
   });
 
-  mongoose.connect(`${process.env.MANGODB_URI}/bookstore`);
+  mongoose.connect(`${process.env.MANGODB_URI}/bookstore`, {
+    autoIndex: true,
+  });
 };
 
 export default connectMongoDB;

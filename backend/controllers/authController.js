@@ -1,26 +1,28 @@
 import jwt from "jsonwebtoken";
-import userModel from "../models/userModel";
+import userModel from "../models/userModel.js";
 import bcrypt from "bcrypt";
-const saltRounds = 20;
+const saltRounds = 10;
 
 const loginUser = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { userName, password } = req.body;
 
-    const user = await userModel.findOne({ username });
+    const user = await userModel.findOne({ userName });
 
     if (!user) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res
+        .status(401)
+        .json({ message: "Invalid credentials1", username: user });
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: "Invalid credentials2" });
     }
 
     const payload = {
       id: user._id,
-      username: user.username,
+      userName: user.userName,
     };
 
     const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
@@ -28,7 +30,7 @@ const loginUser = async (req, res) => {
     });
     res.status(200).json({ accessToken });
   } catch (error) {
-    res.status(500).json("Server error");
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
@@ -58,13 +60,22 @@ const registerUser = async (req, res) => {
       city: city,
     });
 
-    await payload.save();
+    const savedUser = await payload.save();
+    const { password: _, ...withoutPassword } = savedUser.toObject();
 
-    res.status(201).json({ message: "User created successfully" });
+    res.status(201).json({
+      success: true,
+      message: "User created successfully",
+      user: withoutPassword,
+    });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: `Error creating the user: ${error.message}` });
+    if (error.code === 11000) {
+      return res.status(400).json({ message: "Email already exists" });
+    } else {
+      return res
+        .status(500)
+        .json({ message: `Error creating the user: ${error.message}` });
+    }
   }
 };
 
