@@ -6,6 +6,7 @@ import lyn from "./lyn.jpg";
 import facebook from "./facebook.png";
 import instagram from "./instagram.png";
 import twitter from "./twitter.png";
+import linkedIn from "./linkedIn.png";
 
 export const assets = {
   book1,
@@ -16,4 +17,5 @@ export const assets = {
   facebook,
   instagram,
   twitter,
+  linkedIn,
 };

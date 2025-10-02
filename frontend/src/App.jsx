@@ -9,6 +9,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Register from "./pages/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MainLayout from "./pages/MainLayout";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -44,6 +45,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <BookList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
               </ProtectedRoute>
             }
           />

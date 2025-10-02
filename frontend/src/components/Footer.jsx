@@ -1,5 +1,6 @@
 import React from "react";
 import { assets } from "../assets/assets";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -35,20 +36,22 @@ const Footer = () => {
         <div>
           <h2 className="text-xl font-medium mb-5">FIND US ON</h2>
           <div className="flex flex-row items-center justify-start sm:justify-between sm:pr-4">
-            <img
-              src={assets.facebook}
-              alt="facebook"
-              className="w-10 h-10 rounded-3xl"
-            />
+            <Link to={"https://www.linkedin.com/in/lilian-nabawesi-024a7b215/"}>
+              <img
+                src={assets.linkedIn}
+                alt="linkedIn"
+                className="w-10 h-10 rounded-3xl cursor-pointer"
+              />
+            </Link>
             <img
               src={assets.twitter}
               alt="twitter"
-              className="w-10 h-10 rounded-3xl"
+              className="w-10 h-10 rounded-3xl cursor-pointer"
             />
             <img
               src={assets.instagram}
               alt="instagram"
-              className="w-10 h-10 rounded-3xl"
+              className="w-10 h-10 rounded-3xl cursor-pointer"
             />
           </div>
         </div>

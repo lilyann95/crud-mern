@@ -5,9 +5,9 @@ const saltRounds = 10;
 
 const loginUser = async (req, res) => {
   try {
-    const { userName, password } = req.body;
+    const { email, password } = req.body;
 
-    const user = await userModel.findOne({ userName });
+    const user = await userModel.findOne({ email });
 
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });

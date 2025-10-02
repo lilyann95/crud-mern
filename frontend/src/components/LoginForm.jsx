@@ -4,16 +4,16 @@ import { Link } from "react-router-dom";
 import { loginUser } from "../../api/user.js";
 
 const LoginForm = () => {
-  const [form, setForm] = useState({ userName: "", password: "" });
+  const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      if (!form.userName || !form.password) return;
+      if (!form.email || !form.password) return;
       const formData = {
-        userName: form.userName,
+        email: form.email,
         password: form.password,
       };
 
@@ -23,7 +23,6 @@ const LoginForm = () => {
       localStorage.setItem("token", accessToken);
       navigate("/");
     } catch (err) {
-      // console.error(`Error logging in: ${error}`);
       if (err.response) {
         console.error("Login failed:", err.response.data);
       } else {
@@ -43,12 +42,14 @@ const LoginForm = () => {
         className="w-full px-5 pt-5 pb-2"
       >
         <div className="flex flex-col mb-5 px-2">
-          <p className="font-bold text-medium text-gray-500 ml-2">Username:</p>
+          <p className="font-bold text-medium text-gray-500 ml-2">
+            Email Address:
+          </p>
           <input
-            type="text"
-            placeholder="Enter username"
-            value={form.userName}
-            onChange={(e) => setForm({ ...form, userName: e.target.value })}
+            type="email"
+            placeholder="Enter Email Address"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
             className="border border-gray-400 px-3 py-2 rounded-full w-full"
           />
         </div>
